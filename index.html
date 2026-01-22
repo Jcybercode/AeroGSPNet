@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroGSPNet: Graph Signal Processing for Multi-Task Aerodynamic Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .authors {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .authors sup {
+            font-size: 0.7em;
+        }
+
+        .affiliations {
+            font-size: 1em;
+            line-height: 1.9;
+            opacity: 0.9;
+            max-width: 900px;
+            margin: 0 auto 30px;
+        }
+
+        .affiliations sup {
+            font-weight: 600;
+        }
+
+        .contact {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .contact-title {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .email-list {
+            font-size: 1em;
+            opacity: 0.85;
+        }
+
+        .email-list a {
+            color: #64b5f6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .email-list a:hover {
+            color: #90caf9;
+            text-decoration: underline;
+        }
+
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .section h2 {
+            color: #1a73e8;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #e8f0fe;
+            font-weight: 700;
+        }
+
+        .section p {
+            text-align: justify;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .model-architecture {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .model-architecture img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .placeholder-img {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 80px;
+            border-radius: 15px;
+            color: #666;
+            font-size: 1.2em;
+            font-style: italic;
+            border: 2px dashed #90caf9;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #1a73e8;
+            transition: all 0.3s;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(26, 115, 232, 0.2);
+            border-left-width: 8px;
+        }
+
+        .result-card h3 {
+            color: #1a73e8;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-card p {
+            text-align: left;
+            color: #555;
+            font-size: 1em;
+        }
+
+        .code-block {
+            background: #263238;
+            color: #aed581;
+            padding: 30px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 30px 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px 40px;
+            color: white;
+            font-size: 0.95em;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 30px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .placeholder-img {
+                padding: 50px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AeroGSPNet: Graph Signal Processing for<br>Multi-Task Aerodynamic Prediction</h1>
+            
+            <div class="authors">
+                Junjie Wu<sup>1†</sup>, Xikang Feng<sup>1*</sup>, Zhe Ji<sup>1,2*</sup>
+            </div>
+            
+            <div class="affiliations">
+                <sup>1</sup>School of Software, Northwestern Polytechnical University, Xi'an, Shanxi, 710129, China<br>
+                <sup>2</sup>Yangtze River Delta Research Institute of NPU Northwestern Polytechnical University, Taicang, Jiangsu, 215400, China
+            </div>
+
+            <div class="contact">
+                <div class="contact-title">Contact</div>
+                <div class="email-list">
+                    <a href="mailto:WJJ2003@mail.nwpu.edu.cn">WJJ2003@mail.nwpu.edu.cn</a>, 
+                    <a href="mailto:fxk@nwpu.edu.cn">fxk@nwpu.edu.cn</a>, 
+                    <a href="mailto:jizhe@nwpu.edu.cn">jizhe@nwpu.edu.cn</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2>🔬 Method Overview</h2>
+            <div class="model-architecture">
+                <img 
+                    src="images/model.png" 
+                    alt="AeroGSPNet Model Architecture"
+                    style="
+                        width: 100%; 
+                        height: auto; 
+                        max-width: 100%; 
+                        border-radius: 15px; 
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.05); 
+                        display: block; 
+                        margin: 0 auto;
+                    "
+                    loading="lazy">
+                <p style="text-align: center; margin-top: 15px; font-style: italic; color: #666;">
+                    Figure 1: AeroGSPNet Model Architecture
+                </p>
+            </div>
+            <p>
+                AeroGSPNet redesigns a hierarchical modeling and abstraction strategy to simultaneously improve the accuracy and efficiency of aerodynamic prediction. Specifically, the model first employs Graph Feature Embedding to reduce the number of points involved in global modeling from N to N′, and then utilizes a Patch Attention module to adaptively aggregate points into G ≪ N local patches, such that global dependencies are modeled exclusively at the patch level. This results in a hierarchical abstraction process of N → N′ → G, enabling the training of drag prediction tasks on a single RTX 4090 GPU.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>📊 Error Analysis Results</h2>
+            
+            <h3 style="color: #1a73e8; font-size: 1.6em; margin-top: 10px; margin-bottom: 20px;">Drag Prediction Results</h3>
+            <div class="model-architecture">
+                <img 
+                    src="images/result.png" 
+                    alt="Drag Prediction Comparison"
+                    style="
+                        width: 100%; 
+                        height: auto; 
+                        max-width: 100%; 
+                        border-radius: 15px; 
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.05); 
+                        display: block; 
+                        margin: 0 auto;
+                    "
+                    loading="lazy">
+                <p style="text-align: center; margin-top: 15px; font-style: italic; color: #666;">
+                    Figure 2: Drag prediction results on DrivAerNet (left) and DrivAerNet++ (right)
+                </p>
+            </div>
+
+            <h3 style="color: #1a73e8; font-size: 1.6em; margin-top: 50px; margin-bottom: 20px;">More Visualized Error Results</h3>
+            <p style="margin-bottom: 20px;">
+            Based on a quantitative analysis of the error distribution, we selected the ten samples with the largest prediction errors for in-depth investigation. The results indicate that the errors are predominantly concentrated in the following regions:
+            </p>
+
+            <ol style="margin-bottom: 30px; padding-left: 20px;">
+            <li>
+                <strong>Frontal intake grille and bumper area</strong>, where the presence of a high-pressure stagnation point leads to sharp physical gradients, resulting in deviations in capturing the pressure core;
+            </li>
+            <li>
+                <strong>Wheels, rims, and wheel-arch regions</strong>, which involve coupled rotational motion and complex cavity–flow interactions;
+            </li>
+            <li>
+                <strong>Rear end and rear bumper area</strong>, where flow separation from the vehicle body gives rise to a low-pressure recirculation wake, and vortex shedding induces pronounced fluctuations in base-pressure prediction.
+            </li>
+            </ol>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px;">
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_0121.png" alt="F_D_WM_WW_0121 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_0121 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_0187.png" alt="F_D_WM_WW_0187 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_0187 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_0261.png" alt="F_D_WM_WW_0261 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_0261 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_0460.png" alt="F_D_WM_WW_0460 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_0460 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_1400.png" alt="F_D_WM_WW_1400 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_1400 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_1789.png" alt="F_D_WM_WW_1789 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_1789 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_1877.png" alt="F_D_WM_WW_1877 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_1877 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_2013.png" alt="F_D_WM_WW_2013 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_2013 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_2729.png" alt="F_D_WM_WW_2729 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_2729 Absolute Error
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_3316.png" alt="F_D_WM_WW_3316 Absolute Error"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                                box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        F_D_WM_WW_3316 Absolute Error
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+        </footer>
+    </div>
+</body>
+</html>
