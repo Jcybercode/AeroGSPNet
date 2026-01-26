@@ -288,9 +288,88 @@
                 </p>
             </div>
 
+            <h3 style="color: #1a73e8; font-size: 1.6em; margin-top: 60px; margin-bottom: 20px;">
+                More Quantitative Comparison Results on DrivAerNet++ Dataset
+            </h3>
+
+            <p style="margin-bottom: 20px; text-align: justify;">
+                Table 1: Quantitative comparison of drag coefficient prediction on the DrivAerNet++ dataset with several existing methods, including the recently proposed DAT.
+                Lower MSE and MAE, and higher R² indicate better performance.
+                Except for AeroGSPNet (our method), all other results are taken from He et al. (2025).
+            </p>
+
+            <p style="margin-bottom: 30px; text-align: justify;">
+                Compared to DAT (5.41M parameters), AeroGSPNet uses only 1.209M parameters (approximately 22% of DAT's parameter count) while reducing MSE from 0.000118 to 0.000092.
+            </p>
+
+            <div style="overflow-x: auto; margin: 40px 0;">
+                <table style="width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.12); background: white; font-size: 1.05em;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%); color: white;">
+                            <th style="padding: 22px 15px; text-align: left; font-weight: 700; width: 28%;">Model</th>
+                            <th style="padding: 22px 15px; text-align: center; font-weight: 700; width: 24%;">MSE</th>
+                            <th style="padding: 22px 15px; text-align: center; font-weight: 700; width: 24%;">MAE</th>
+                            <th style="padding: 22px 15px; text-align: center; font-weight: 700; width: 24%;">R²</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #f8fbff; transition: background 0.3s;">
+                            <td style="padding: 18px 15px;">PointNet</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.000149</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.00960</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.644</td>
+                        </tr>
+                        <tr style="background: #ffffff; transition: background 0.3s;">
+                            <td style="padding: 18px 15px;">GCNN</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.000171</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.01043</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.596</td>
+                        </tr>
+                        <tr style="background: #f8fbff; transition: background 0.3s;">
+                            <td style="padding: 18px 15px;">RegDGCNN</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.000142</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.00931</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.643</td>
+                        </tr>
+                        <tr style="background: #ffffff; transition: background 0.3s;">
+                            <td style="padding: 18px 15px;">Transolver</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.000603</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.02031</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.571</td>
+                        </tr>
+                        <tr style="background: #f8fbff; transition: background 0.3s;">
+                            <td style="padding: 18px 15px;">Transolver++</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.000461</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.01769</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.672</td>
+                        </tr>
+                        <tr style="background: #ffffff; transition: background 0.3s;">
+                            <td style="padding: 18px 15px;">DAT</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.000118</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.00911</td>
+                            <td style="padding: 18px 15px; text-align: center;">0.872</td>
+                        </tr>
+                        <tr style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); transition: background 0.3s;">
+                            <td style="padding: 18px 15px; font-weight: 700; color: #2e7d32;">AeroGSPNet (Ours)</td>
+                            <td style="padding: 18px 15px; text-align: center; font-weight: 700; color: #2e7d32;">0.000092</td>
+                            <td style="padding: 18px 15px; text-align: center; font-weight: 700; color: #2e7d32;">0.00743</td>
+                            <td style="padding: 18px 15px; text-align: center; font-weight: 700; color: #2e7d32;">0.932</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="text-align: center; margin-top: 15px; font-style: italic; color: #666;">
+                Table 1: Quantitative drag prediction comparison on DrivAerNet++ dataset
+            </p>
+
+            <p style="margin-top: 30px; font-size: 0.95em; color: #555; text-align: justify;">
+                J. He, X. Luo, and Y. Wang, “Drivaer transformer: A high-precision and fast prediction method for vehicle aerodynamic drag coefficient based on the drivaernet++ dataset,” arXiv preprint arXiv:2504.08217, 2025.
+            </p>
+
             <h3 style="color: #1a73e8; font-size: 1.6em; margin-top: 50px; margin-bottom: 20px;">More Visualized Error Results</h3>
             <p style="margin-bottom: 20px;">
-            Based on a quantitative analysis of the error distribution, we selected ten samples with relatively large prediction errors for in-depth investigation. The results indicate that the errors are mainly concentrated in the following regions:
+            Based on a quantitative analysis of the error distribution, we selected the ten samples with the largest prediction errors for in-depth investigation. The results indicate that the errors are predominantly concentrated in the following regions:
             </p>
 
             <ol style="margin-bottom: 30px; padding-left: 20px;">
@@ -395,6 +474,75 @@
                         F_D_WM_WW_3316 Absolute Error
                     </p>
                 </div>
+            </div>
+
+            <h3 style="color: #1a73e8; font-size: 1.6em; margin-top: 60px; margin-bottom: 20px;">
+                Error Analysis in High-Curvature Regions
+            </h3>
+
+            <p style="margin-bottom: 30px; text-align: justify;">
+                <strong>Error Analysis in High-Curvature Regions:</strong>
+                The visualization consists of two parts: the top row highlights regions of the vehicle surface with high geometric curvature, while the bottom row displays the corresponding absolute error distributions in those areas.
+                The comparison reveals that prediction errors are primarily concentrated in localized regions with complex geometric topologies, specifically the inner edges of the wheel arches, the fine details of the front grille, the junctions between the side mirrors and the body, and the sharp ridges of the rear diffuser.
+                These results indicate that errors are highly localized and predominantly occur at geometric singularities with extremely small curvature radii, whereas errors on smooth, flat surfaces remain negligible.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 40px;">
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_0121_high_curvature.png" alt="High Curvature Region Error 1"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                               box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        Sample 1: F_D_WM_WW_0121 – High-curvature view (top) and absolute error distribution (bottom)
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_0187_high_curvature.png" alt="High Curvature Region Error 2"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                               box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        Sample 2: F_D_WM_WW_0187 – High-curvature view (top) and absolute error distribution (bottom)
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_0261_high_curvature.png" alt="High Curvature Region Error 3"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                               box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        Sample 3: F_D_WM_WW_0261 – High-curvature view (top) and absolute error distribution (bottom)
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_0460_high_curvature.png" alt="High Curvature Region Error 4"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                               box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        Sample 4: F_D_WM_WW_0460 – High-curvature view (top) and absolute error distribution (bottom)
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_1400_high_curvature.png" alt="High Curvature Region Error 5"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                               box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        Sample 5: F_D_WM_WW_1400 – High-curvature view (top) and absolute error distribution (bottom)
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="images/F_D_WM_WW_1789_high_curvature.png" alt="High Curvature Region Error 6"
+                        style="width: 100%; max-width: 1100px; margin: 0 auto; border-radius: 15px;
+                               box-shadow: 0 8px 30px rgba(0,0,0,0.15); display: block;">
+                    <p style="margin-top: 12px; color: #666; font-size: 1.05em; font-weight: 500; text-align: center;">
+                        Sample 6: F_D_WM_WW_1789 – High-curvature view (top) and absolute error distribution (bottom)
+                    </p>
+                </div>
+
             </div>
 
         </div>
